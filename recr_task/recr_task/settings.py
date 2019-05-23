@@ -73,12 +73,12 @@ WSGI_APPLICATION = 'recr_task.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+try:
+    from recr_task.local_settings import DATABASES
+except ModuleNotFoundError:
+    print("No database configuration in local_settings.py file!")
+    print("Fill in the data and try again")
+    exit(0)
 
 
 # Password validation
